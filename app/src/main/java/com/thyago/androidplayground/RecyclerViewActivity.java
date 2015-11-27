@@ -2,6 +2,7 @@ package com.thyago.androidplayground;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
@@ -24,10 +25,10 @@ public class RecyclerViewActivity extends AppCompatActivity {
         // you provide access to all the views for a data item in a view holder
         public class ViewHolder extends RecyclerView.ViewHolder {
             // each data item is just a string in this case
-            public RelativeLayout mRelativeLayout;
-            public ViewHolder(RelativeLayout v) {
+            public CardView mCardView;
+            public ViewHolder(CardView v) {
                 super(v);
-                mRelativeLayout = v;
+                mCardView = v;
             }
         }
 
@@ -45,7 +46,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
                     .inflate(R.layout.recycler_view_item, parent, false);
             // set the view's size, margins, paddings and layout parameters
 
-            ViewHolder vh = new ViewHolder((RelativeLayout) v);
+            ViewHolder vh = new ViewHolder((CardView) v);
             return vh;
         }
 
@@ -54,7 +55,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
         public void onBindViewHolder(ViewHolder holder, int position) {
             // - get element from your dataset at this position
             // - replace the contents of the view with that element
-            TextView v = (TextView) holder.mRelativeLayout.findViewById(R.id.text_item_recycler);
+            TextView v = (TextView) holder.mCardView.findViewById(R.id.text_item_recycler);
             v.setText(mDataset[position]);
         }
 
@@ -80,10 +81,10 @@ public class RecyclerViewActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
 
-        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(5, StaggeredGridLayoutManager.HORIZONTAL);
+        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
 
-        String[] dataSet = getDataSet(50);
+        String[] dataSet = getDataSet(5000);
 
         MyAdapter adapter = new MyAdapter(dataSet);
         recyclerView.setAdapter(adapter);
