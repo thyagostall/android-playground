@@ -1,8 +1,0 @@
-<resources>
-    <string name="app_name">Android Playground</string>
-    <string name="action_settings">Settings</string>
-    <string name="button_placeholder">Button placeholder</string>
-    <string name="title_activity_pictured_action_bar">PicturedActionBarActivity</string>
-
-    <string name="hello_world">Hello world!</string>
-</resources>
