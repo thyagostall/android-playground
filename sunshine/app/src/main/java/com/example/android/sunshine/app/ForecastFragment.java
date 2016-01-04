@@ -133,8 +133,6 @@ public class ForecastFragment extends Fragment {
             if (unitType.equals(getString(R.string.pref_unit_imperial))) {
                 high = (high * 1.8) + 32;
                 low = (low * 1.8) + 32;
-            } else {
-                Log.d(LOG_TAG, "Unit type not found + " + unitType);
             }
 
             long roundedHigh = Math.round(high);
