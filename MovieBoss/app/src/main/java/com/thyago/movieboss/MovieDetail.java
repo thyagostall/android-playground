@@ -6,18 +6,27 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class DiscoverActivity extends AppCompatActivity {
+public class MovieDetail extends AppCompatActivity {
+
+    public static final String EXTRA_MOVIE = "movie";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_discover);
+
+        MovieDetailFragment details = new MovieDetailFragment();
+        Bundle arguments = getIntent().getExtras();
+        details.setArguments(arguments);
+
+        getSupportFragmentManager().beginTransaction()
+                .add(android.R.id.content, details)
+                .commit();
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_discover, menu);
+        getMenuInflater().inflate(R.menu.menu_movie_detail, menu);
         return true;
     }
 

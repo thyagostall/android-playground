@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="pref_sorting">
+        <item>Most Popular</item>
+        <item>Release Date</item>
+    </array>
+
+    <array name="pref_sorting_values">
+        <item>popularity.desc</item>
+        <item>release_date.desc</item>
+    </array>
+</resources>

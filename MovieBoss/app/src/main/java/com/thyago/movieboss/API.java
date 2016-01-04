@@ -19,18 +19,44 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by thyago on 1/3/16.
  */
 public class API {
     public static enum SortingCriterion {
-        POPULARITY,
-        RELEASE_DATE
+        POPULARITY("popularity.desc"),
+        RELEASE_DATE("release_date.desc");
+
+        private String key;
+
+        SortingCriterion(String key) {
+            this.key = key;
+        }
+
+        public String getKey() {
+            return key;
+        }
+
+        public static SortingCriterion fromString(String s) {
+            if (s == null) {
+                return null;
+            }
+
+            for (SortingCriterion criterion : SortingCriterion.values()) {
+                if (s.equalsIgnoreCase(criterion.key)) {
+                    return criterion;
+                }
+            }
+            return null;
+        }
     }
 
     private static String LOG_TAG = API.class.getSimpleName();
     private static String API_KEY = "6f126bdc69ae948a7cd288dee773f891";
+
+    private String mPosterURLPrefix;
 
     public List<Movie> discover(SortingCriterion sortingCriterion) {
         HttpURLConnection urlConnection = null;
@@ -85,8 +111,7 @@ public class API {
         final String FIELD_TITLE = "title";
         final String FIELD_ORIGINAL_TITLE = "original_title";
         final String FIELD_RELEASE_DATE = "release_date";
-        // TODO: Include the picture into the movie object
-        final String FIELD_PICTURE = "poster_path";
+        final String FIELD_POSTER_PATH = "poster_path";
         final String FIELD_RATING = "vote_average";
         final String FIELD_PLOT = "overview";
 
@@ -106,6 +131,9 @@ public class API {
             item.setReleaseDate(parseDate(jsonItem.getString(FIELD_RELEASE_DATE)));
             item.setRating(jsonItem.getDouble(FIELD_RATING));
 
+            String url = mPosterURLPrefix + jsonItem.getString(FIELD_POSTER_PATH);
+            item.setPosterURL(url);
+
             result.add(item);
         }
         return result;
@@ -119,8 +147,11 @@ public class API {
                 .appendPath("3")
                 .appendPath("discover")
                 .appendPath("movie")
+                .appendQueryParameter("sort_by", sortingCriterion.getKey())
                 .appendQueryParameter("api_key", API_KEY)
                 .build();
+
+        mPosterURLPrefix = "http://image.tmdb.org/t/p/w185/";
         try {
             return new URL(rawUri.toString());
         } catch (MalformedURLException e) {
@@ -130,7 +161,7 @@ public class API {
     }
 
     private static Date parseDate(String input) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         try {
             return format.parse(input);
         } catch (ParseException e) {
