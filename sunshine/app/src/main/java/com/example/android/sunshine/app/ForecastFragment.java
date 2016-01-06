@@ -18,7 +18,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,7 +46,7 @@ public class ForecastFragment extends Fragment {
         String zipCode = PreferenceManager.getDefaultSharedPreferences(getActivity())
                 .getString(getString(R.string.pref_location_key), getString(R.string.pref_location_default));
 
-        FetchWeatherTask fetcher = new FetchWeatherTask();
+        FetchWeatherTask fetcher = new FetchWeatherTask(getActivity(), mForecastAdapter);
         fetcher.execute(zipCode);
     }
 
@@ -117,7 +116,7 @@ public class ForecastFragment extends Fragment {
         return rootView;
     }
 
-    public class FetchWeatherTask extends AsyncTask<String, Void, String[]> {
+    public class Old_FetchWeatherTask extends AsyncTask<String, Void, String[]> {
 
         private final String LOG_TAG = FetchWeatherTask.class.getSimpleName();
 
