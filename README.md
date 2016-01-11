@@ -15,3 +15,19 @@ This app was made in the Udacity's [Developing Android Apps: Android Fundamental
 ## Development
 
 The development this app is currently in progress.
+
+# Movie Boss
+
+Final project for the [Developing Android Apps: Android Fundamentals](https://www.udacity.com/course/developing-android-apps--ud853) course.
+
+# Fragment Activity Lifecycle
+
+Test of Activities and Fragments lifecycle.
+
+## Android Resources Used
+
+- Activities;
+
+## Development
+
+- Iterative development to get familiar with new concepts and for future reference.
