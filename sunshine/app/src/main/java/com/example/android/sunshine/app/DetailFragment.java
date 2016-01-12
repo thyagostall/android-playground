@@ -30,9 +30,11 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
     private static final String LOG_TAG = DetailFragment.class.getSimpleName();
 
     private static final String FORECAST_SHARE_HASHTAG = " #SunshineApp";
+    public static final String DETAIL_URI = "URI";
 
     private ShareActionProvider mShareActionProvider;
     private String mForecastStr;
+    private Uri mUri;
 
     private static final int DETAIL_LOADER = 0;
 
@@ -97,6 +99,11 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
 
+        Bundle args = getArguments();
+        if (args != null) {
+            mUri = args.getParcelable(DetailFragment.DETAIL_URI);
+        }
+
         mIconView = (ImageView) rootView.findViewById(R.id.detail_icon);
         mDateView = (TextView) rootView.findViewById(R.id.detail_date_textview);
         mFriendlyDateView = (TextView) rootView.findViewById(R.id.detail_day_textview);
@@ -129,7 +136,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
 
         Intent intent = getActivity().getIntent();
         Uri weatherForecastUri = intent.getData();
-        if (intent == null) {
+        if (intent.getData() == null) {
             return null;
         }
 
@@ -153,8 +160,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
             Log.d(LOG_TAG, "---> " + data.getColumnName(i));
         }
         int weatherId = data.getInt(data.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_WEATHER_ID));
-
-//        mIconView.setImageResource(Utility.getArtResourceForWeatherCondition(weatherId));
+        mIconView.setImageResource(Utility.getArtResourceForWeatherCondition(weatherId));
 
         String dateString = Utility.formatDate(data.getLong(data.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_DATE)));
         String weatherDescription = data.getString(data.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_SHORT_DESC));
@@ -184,5 +190,9 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         getLoaderManager().restartLoader(DETAIL_LOADER, null, this);
+    }
+
+    void onLocationChanged(String newLocation) {
+        Uri uri = mUri;
     }
 }

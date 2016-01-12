@@ -3,6 +3,7 @@ package com.example.android.sunshine.app;
 import android.content.Context;
 import android.database.Cursor;
 import android.support.v4.widget.CursorAdapter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import org.w3c.dom.Text;
  */
 public class ForecastAdapter extends CursorAdapter {
 
+    private static final String LOG_TAG = ForecastAdapter.class.getSimpleName();
     private final int VIEW_TYPE_TODAY = 0;
     private final int VIEW_TYPE_FUTURE_DAY = 1;
 
@@ -70,7 +72,7 @@ public class ForecastAdapter extends CursorAdapter {
             layoutId = R.layout.list_item_forecast;
         }
         View view = LayoutInflater.from(context).inflate(layoutId, parent, false);
-        ViewHolder viewHolder = new ViewHolder(view);
+        ViewHolder viewHolder = new ViewHolder(view, viewType);
         view.setTag(viewHolder);
         return view;
     }
@@ -81,8 +83,14 @@ public class ForecastAdapter extends CursorAdapter {
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
         ViewHolder holder = (ViewHolder) view.getTag();
-        int weatherId = cursor.getInt(ForecastFragment.COL_WEATHER_ID);
-        holder.iconView.setImageResource(R.drawable.ic_launcher);
+
+        int weatherId = cursor.getInt(ForecastFragment.COL_WEATHER_CONDITION_ID);
+        if (holder.layoutId == VIEW_TYPE_TODAY) {
+            holder.iconView.setImageResource(Utility.getArtResourceForWeatherCondition(weatherId));
+        } else {
+            holder.iconView.setImageResource(Utility.getIconResourceForWeatherCondition(weatherId));
+        }
+        Log.i(LOG_TAG + "-LI", holder.layoutId + "");
 
         String date = Utility.getFriendlyDayString(context, cursor.getLong(ForecastFragment.COL_WEATHER_DATE));
         holder.dateView.setText(date);
@@ -108,12 +116,16 @@ public class ForecastAdapter extends CursorAdapter {
         public final TextView highTempView;
         public final TextView lowTempView;
 
-        public ViewHolder(View view) {
+        public final int layoutId;
+
+        public ViewHolder(View view, int layoutId) {
             iconView = (ImageView) view.findViewById(R.id.list_item_icon);
             dateView = (TextView) view.findViewById(R.id.list_item_date_textview);
             descriptionView = (TextView) view.findViewById(R.id.list_item_forecast_textview);
             highTempView = (TextView) view.findViewById(R.id.list_item_high_textview);
             lowTempView = (TextView) view.findViewById(R.id.list_item_low_textview);
+
+            this.layoutId = layoutId;
         }
     }
 }
