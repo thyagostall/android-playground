@@ -2,9 +2,8 @@ package com.example.android.sunshine.app;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -24,7 +23,7 @@ public class MainActivity extends ActionBarActivity implements ForecastFragment.
             mTwoPane = true;
             if (savedInstanceState == null) {
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.weather_detail_container, new DetailFragment())
+                        .replace(R.id.weather_detail_container, new DetailFragment(), DETAIL_FRAGMENT_TAG)
                         .commit();
             }
         } else {
@@ -41,6 +40,10 @@ public class MainActivity extends ActionBarActivity implements ForecastFragment.
             ForecastFragment forecastFragment = (ForecastFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_forecast);
             if (forecastFragment != null) {
                 forecastFragment.onLocationChanged();
+            }
+            DetailFragment detailFragment = (DetailFragment) getSupportFragmentManager().findFragmentByTag(DETAIL_FRAGMENT_TAG);
+            if (detailFragment != null) {
+                detailFragment.onLocationChanged(currentLocation);
             }
             mLocation = currentLocation;
         }

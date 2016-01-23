@@ -247,7 +247,7 @@ public class FetchWeatherTask extends AsyncTask<String, Void, Void> {
                 .appendQueryParameter("mode", "json")
                 .appendQueryParameter("units", "metric")
                 .appendQueryParameter("cnt", "7")
-                .appendQueryParameter("appid", "2de143494c0b295cca9337e1e96b00e0")
+                .appendQueryParameter("appid", "1911f2a695ebb9b36fba20876a92fbd7")
                 .build().toString();
     }
 
