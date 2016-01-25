@@ -127,18 +127,6 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-//        long forecastDate = getArguments().getLong(EXTRA_DATE);
-//
-//        String sortOrder = WeatherContract.WeatherEntry.COLUMN_DATE;
-//
-//        String location = Utility.getPreferredLocation(getActivity());
-//        Uri weatherForecastUri = WeatherContract.WeatherEntry.buildWeatherLocationWithDate(location, forecastDate);
-
-//        Intent intent = getActivity().getIntent();
-//        Uri weatherForecastUri = intent.getData();
-//        if (intent == null || intent.getData() == null) {
-//            return null;
-//        }
         if (mUri == null) {
             return null;
         }
@@ -158,10 +146,6 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
             return;
         }
 
-        Log.d(LOG_TAG, "" + data.getColumnCount());
-        for (int i = 0; i < data.getColumnCount(); i++) {
-            Log.d(LOG_TAG, "---> " + data.getColumnName(i));
-        }
         int weatherId = data.getInt(data.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_WEATHER_ID));
         mIconView.setImageResource(Utility.getArtResourceForWeatherCondition(weatherId));
 
