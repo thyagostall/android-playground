@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
+    android:background="@color/sunshine_blue"
     android:padding="10dp"
-    android:background="@drawable/touch_selector"
     android:layout_height="match_parent">
 
     <LinearLayout
