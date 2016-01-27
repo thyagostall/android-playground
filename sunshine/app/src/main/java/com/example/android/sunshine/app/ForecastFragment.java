@@ -20,6 +20,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.android.sunshine.app.data.WeatherContract;
+import com.example.android.sunshine.app.service.SunshineService;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -69,8 +70,9 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
     public void updateWeather() {
         String zipCode = Utility.getPreferredLocation(getActivity());
 
-        FetchWeatherTask fetcher = new FetchWeatherTask(getActivity());
-        fetcher.execute(zipCode);
+        Intent intent = new Intent(getActivity(), SunshineService.class);
+        intent.putExtra(SunshineService.LOCATION_QUERY, zipCode);
+        getActivity().startService(intent);
     }
 
     @Override

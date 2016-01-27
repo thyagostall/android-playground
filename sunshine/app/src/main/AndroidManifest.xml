@@ -39,6 +39,6 @@
         <provider
             android:authorities="com.example.android.sunshine.app"
             android:name="com.example.android.sunshine.app.data.WeatherProvider" />
+        <service android:name=".service.SunshineService"/>
     </application>
-
 </manifest>
