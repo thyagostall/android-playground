@@ -1,8 +1,10 @@
 package com.example.android.sunshine.app.service;
 
 import android.app.IntentService;
+import android.content.BroadcastReceiver;
 import android.content.ContentUris;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -41,6 +43,8 @@ public class SunshineService extends IntentService {
 
         // These two need to be declared outside the try/catch
         // so that they can be closed in the finally block.
+        Log.d(LOG_TAG, "Started!!");
+
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
 
@@ -274,9 +278,6 @@ public class SunshineService extends IntentService {
                 inserted = getContentResolver().bulkInsert(WeatherContract.WeatherEntry.CONTENT_URI, cvArray);
             }
 
-            Log.d(LOG_TAG, "FetchWeaterTask Complete. " + inserted + " Inserted");
-
-
         } catch (JSONException e) {
             Log.e(LOG_TAG, e.getMessage(), e);
             e.printStackTrace();
@@ -296,6 +297,16 @@ public class SunshineService extends IntentService {
                 .appendQueryParameter("cnt", "7")
                 .appendQueryParameter("appid", "1911f2a695ebb9b36fba20876a92fbd7")
                 .build().toString();
+    }
+
+    public static class AlarmReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Intent sendIntent = new Intent(context, SunshineService.class);
+            sendIntent.putExtra(LOCATION_QUERY, intent.getStringExtra(LOCATION_QUERY));
+            context.startService(sendIntent);
+        }
     }
 
 }
