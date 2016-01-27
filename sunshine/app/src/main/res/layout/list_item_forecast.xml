@@ -12,52 +12,64 @@
     android:padding="16dp"
     android:orientation="horizontal">
 
-    <ImageView
-        android:layout_width="wrap_content"
+    <FrameLayout
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
-        android:id="@+id/list_item_icon" />
+        android:layout_gravity="center">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/list_item_icon" />
+
+    </FrameLayout>
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingLeft="16dp"
-        android:layout_weight="1">
+        android:layout_weight="7">
 
         <TextView
             android:padding="3dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tomorrow"
+            android:fontFamily="sans-serif-condensed"
+            android:textAppearance="?android:textAppearanceLarge"
             android:id="@+id/list_item_date_textview" />
 
         <TextView
             android:padding="3dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Clear"
+            android:fontFamily="sans-serif-condensed"
+            android:textAppearance="?android:textAppearanceSmall"
             android:id="@+id/list_item_forecast_textview" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:gravity="right"
-        android:orientation="vertical">
+        android:layout_weight="2"
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal">
 
         <TextView
             android:padding="3dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="20 C"
+            android:fontFamily="sans-serif-condensed"
+            android:textAppearance="?android:textAppearanceLarge"
             android:id="@+id/list_item_high_textview" />
 
         <TextView
             android:padding="3dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="8 C"
+            android:fontFamily="sans-serif-condensed"
+            android:textAppearance="?android:textAppearanceSmall"
             android:id="@+id/list_item_low_textview" />
 
     </LinearLayout>
