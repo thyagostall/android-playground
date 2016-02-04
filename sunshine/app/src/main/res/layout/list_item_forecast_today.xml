@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
-    android:padding="10dp"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:background="@color/sunshine_blue"
+    android:paddingBottom="16dp"
     android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:padding="10dp"
-        android:gravity="center_horizontal"
+        android:layout_weight="3"
+        android:paddingLeft="60dp"
+        android:gravity="left"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="22sp"
+            android:fontFamily="sans-serif-condensed"
+            android:textColor="#fff"
             android:id="@+id/list_item_date_textview"
             android:text="Today, and some date" />
 
@@ -23,15 +27,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/list_item_high_textview"
-            android:paddingTop="15dp"
-            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="72sp"
+            android:fontFamily="sans-serif-light"
+            android:textColor="#fff"
             android:text="20 C" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="15dp"
-            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="36sp"
+            android:paddingLeft="5dp"
+            android:fontFamily="sans-serif-light"
+            android:textColor="#fff"
             android:id="@+id/list_item_low_textview"
             android:text="8 C" />
 
@@ -41,18 +48,22 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:layout_weight="1"
+        android:layout_weight="2"
         android:orientation="vertical">
 
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:id="@+id/list_item_icon" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/list_item_forecast_textview"
+            android:paddingTop="20dp"
+            android:fontFamily="sans-serif-condensed"
+            android:textSize="22sp"
+            android:textColor="#fff"
             android:text="Clear"/>
 
     </LinearLayout>
