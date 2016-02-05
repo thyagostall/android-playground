@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">MediaRecorder</string>
     <string name="say_something">Say something</string>
+    <string name="slide_outside_to_cancel">Slide outside to cancel</string>
 </resources>

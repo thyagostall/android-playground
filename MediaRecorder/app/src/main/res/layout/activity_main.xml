@@ -35,4 +35,15 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textAlignment="center"
+        android:visibility="invisible"
+        android:layout_below="@id/view_position_text_view"
+        android:id="@+id/slide_to_cancel_text_view"
+        android:text="@string/slide_outside_to_cancel"/>
+
 </RelativeLayout>
