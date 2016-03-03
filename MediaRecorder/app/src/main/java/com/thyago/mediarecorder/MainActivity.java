@@ -1,6 +1,8 @@
 package com.thyago.mediarecorder;
 
+import android.content.Context;
 import android.graphics.Typeface;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.net.Uri;
@@ -66,9 +68,9 @@ public class MainActivity extends AppCompatActivity {
         mRecorder = null;
 
         try {
-//            mPlayer = MediaPlayer.create(this, Uri.parse(mFileName));
             mPlayer = new MediaPlayer();
             mPlayer.setDataSource(this, Uri.parse(mFileName));
+
             mPlayer.prepare();
             mPlayer.start();
             mPlayer.setVolume(1f, 1f);
@@ -111,8 +113,8 @@ public class MainActivity extends AppCompatActivity {
 
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
-                        startRecording();
                         mSlideToCancel.setVisibility(View.VISIBLE);
+                        startRecording();
                         break;
                     case MotionEvent.ACTION_UP:
                         mSlideToCancel.setVisibility(View.INVISIBLE);
