@@ -15,17 +15,11 @@ public class SmsReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         String action = intent.getAction();
-        Log.d(LOG_TAG, "Received: " + intent.getAction());
-        if (action.equals("android.provider.Telephony.SMS_RECEIVED")){
-            Log.d(LOG_TAG, "SMS");
-            try {
-                Thread.sleep(20000);
-            } catch (InterruptedException e) {
-                Log.d(LOG_TAG, "Broadcast event was stopped");
-            }
-        }
-
         context.unregisterReceiver(this);
+
+        Log.d(LOG_TAG, "SMS: Received and Reading");
+        Intent serviceIntent = new Intent(context, SmsValidationService.class);
+        context.startService(serviceIntent);
     }
 
 }
